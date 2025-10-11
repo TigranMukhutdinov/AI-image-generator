@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Генератор изображений</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 AI Генератор</h1>
+        
+        <div id="guestInterface">
+            <div class="input-group">
+                <input type="text" class="theme-input" id="themeInput" placeholder="Опишите изображение...">
+                <button class="generate-btn" onclick="generateImage()">Сгенерировать</button>
+            </div>
+
+            <div class="examples">
+                <button class="example-btn" onclick="setExample('Space')">Space</button>
+                <button class="example-btn" onclick="setExample('Mountains')">Mountains</button>
+                <button class="example-btn" onclick="setExample('Sea')">Sea</button>
+            </div>
+
+            <div class="auth-prompt">
+                <button class="auth-btn" onclick="showAuth()">Войти/Зарегистрироваться</button>
+            </div>
+        </div>
+
+        <div class="auth-section" id="authSection" style="display: none;">
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="showAuthForm('login')">Вход</button>
+                <button class="auth-tab" onclick="showAuthForm('register')">Регистрация</button>
+            </div>
+            
+            <div class="auth-form active" id="loginForm">
+                <input type="text" class="form-input" id="loginUsername" placeholder="Никнейм">
+                <input type="password" class="form-input" id="loginPassword" placeholder="Пароль">
+                <button class="generate-btn" onclick="login()">Войти</button>
+            </div>
+            
+            <div class="auth-form" id="registerForm">
+                <input type="text" class="form-input" id="registerUsername" placeholder="Никнейм">
+                <input type="password" class="form-input" id="registerPassword" placeholder="Пароль">
+                <button class="generate-btn" onclick="register()">Зарегистрироваться</button>
+            </div>
+        </div>
+
+        <div id="userInterface" style="display: none;">
+            <div class="user-bar">
+                <span>Привет, <span id="usernameDisplay"></span>!</span>
+                <button class="action-btn" onclick="showSavedImages()">Сохранения</button>
+                <button class="action-btn" onclick="showPasswordSection()">Сменить пароль</button>
+                <button class="action-btn" onclick="logout()">Выйти</button>
+            </div>
+
+            <div class="input-group">
+                <input type="text" class="theme-input" id="userThemeInput" placeholder="Опишите изображение...">
+                <button class="generate-btn" onclick="generateImage()">Сгенерировать</button>
+            </div>
+        </div>
+
+        <div class="password-section" id="passwordSection" style="display: none;">
+            <h3>Смена пароля</h3>
+            <input type="password" class="form-input" id="currentPassword" placeholder="Текущий пароль">
+            <input type="password" class="form-input" id="newPassword" placeholder="Новый пароль">
+            <input type="password" class="form-input" id="confirmPassword" placeholder="Повторите пароль">
+            <div class="password-actions">
+                <button class="generate-btn" onclick="updatePassword()">Обновить</button>
+                <button class="back-btn" onclick="showMainInterface()">Назад</button>
+            </div>
+            <div id="passwordMessage"></div>
+        </div>
+
+        <div class="result-section" id="resultSection" style="display: none;">
+            <img class="generated-image" id="generatedImage" alt="Сгенерированное изображение">
+            <div class="image-actions">
+                <button class="action-btn" onclick="downloadImage()">Скачать</button>
+                <button class="action-btn" id="saveBtn" onclick="saveCurrentImage()" style="display: none;">Сохранить</button>
+            </div>
+        </div>
+
+        <div class="saved-section" id="savedSection" style="display: none;">
+            <h3>Мои сохранения</h3>
+            <button class="back-btn" onclick="showMainInterface()">← Назад</button>
+            <div class="saved-images-grid" id="savedImagesGrid"></div>
+        </div>
+
+        <div class="loading" id="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Генерируем изображение...</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
